@@ -1,106 +1,99 @@
-const products = [
-  {
-    img: "img/123 1.png",
-    title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    price: 10.95,
-    description: `Your perfect pack for everyday use and walks in the forest.
-    Stash your laptop (up to 15 inches) in the padded sleeve, your
-    everyday`,
-    rating: 3.9,
-    count: 120,
-    category: `men's clothing`,
-    color: "red",
-  },
-  {
-    img: "img/123 1.png",
-    title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    price: 20.95,
-    description: `Your perfect pack for everyday use and walks in the forest.
-    Stash your laptop (up to 15 inches) in the padded sleeve, your
-    everyday`,
-    rating: 3.9,
-    count: 120,
-    category: `men's clothing`,
-    color: "black",
-  },
-  {
-    img: "img/123 1.png",
-    title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    price: 40.95,
-    description: `Your perfect pack for everyday use and walks in the forest.
-    Stash your laptop (up to 15 inches) in the padded sleeve, your
-    everyday`,
-    rating: 3.9,
-    count: 120,
-    category: `men's clothing`,
-    color: "blue",
-  },
-  {
-    img: "img/123 1.png",
-    title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    price: 109.95,
-    description: `Your perfect pack for everyday use and walks in the forest.
-    Stash your laptop (up to 15 inches) in the padded sleeve, your
-    everyday`,
-    rating: 3.9,
-    count: 120,
-    category: `men's clothing`,
-    color: "blue",
-  },
-  {
-    img: "img/123 1.png",
-    title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    price: 800.95,
-    description: `Your perfect pack for everyday use and walks in the forest.
-    Stash your laptop (up to 15 inches) in the padded sleeve, your
-    everyday`,
-    rating: 3.9,
-    count: 120,
-    category: `men's clothing`,
-    color: "red",
-  },
-  {
-    img: "img/123 1.png",
-    title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    price: 5000.95,
-    description: `Your perfect pack for everyday use and walks in the forest.
-    Stash your laptop (up to 15 inches) in the padded sleeve, your
-    everyday`,
-    rating: 3.9,
-    count: 120,
-    category: `jewelery`,
-    color: "red",
-  },
-];
+let createProducts = function (array, count) {
+  for (i = 0; i < count; i++) {
+    array.push({
+      img: "img/123 1.png",
+      title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+      description: `Your perfect pack for everyday use and walks in the forest.
+        Stash your laptop (up to 15 inches) in the padded sleeve, your
+        everyday`
+    })
+  }
+}
 
-let newId = 0;
-products.map(v => {
-  newId++
-  return v.id = newId;
-})
+let setNewArg = function (array, nameFilter, ...args) {
+  let min = 0;
+  let max = args.length - 1;
+  array.forEach(element => {
+    element[nameFilter] = args[Math.floor(Math.random() * (max - min + 1)) + min]
+  });
+}
+
+let setNewMinMax = function (array, nameFilter, min, max, signs = 0.1) {
+  signs = Math.pow(10, signs)
+  array.forEach(element => {
+    element[nameFilter] = Math.floor(Math.random() * signs * (max - min + 1)) / signs;
+  });
+}
+
+let newId = -1;
+function setNewId(array) {
+  array.map(v => {
+    newId++
+    return v.id = newId;
+  })
+}
+
+let products = [];
+createProducts(products, 40);
+setNewArg(products, "size", "XS", "S", "M", "L", "XL");
+setNewMinMax(products, "price", 10, 1000, 2);
+setNewMinMax(products, "rating", 1, 5, 1);
+setNewMinMax(products, "count", 1, 120, 0);
+setNewArg(products, "color", "blue", "gray", "beige", "black", "multicolor", "whie", "red", "purple");
+setNewArg(products, "category", "men's clothing", "jewelery", "electronics", "women's clothing");
+setNewId(products);
+
+
 
 const sectionMain = document.querySelector(".main__right");
+let sectoinPageCouners;
+let countOfpages;
+let counterPageitems;
 
-function displayProducts(arr) {
+function displayProducts(arr, showPage = 1, countShow = 6) {
+  arr = [...arr];
+  countOfpages = Math.ceil(arr.length / countShow);
   sectionMain.innerHTML = ``;
-  arr.forEach((e) => {
+  arr.splice(countShow * (showPage - 1), countShow).forEach((e) => {
     sectionMain.innerHTML += `
     <div class="item" id="${e.id}">
         <img src="${e.img}" alt="" />
         <h5>${e.title}</h5>
-        <h6>${e.price}</h6>
-        <p>${e.description}</p>
+        <h6>$ ${e.price}</h6>
+        <p class="item__description" >${e.description}</p>
         <div class="item__about">
-          <h5>rating: ${e.rating}</h5>
-          <h5>count: ${e.count}</h5>
+          <h5>rating:<p>${e.rating}</p></h5>
+          <h5>count:
+          <p>${e.count}</p>
+          </h5>
           <button>Добавить в корзину</button>
         </div>
     </div>
         `;
   });
+  sectionMain.innerHTML += `
+  <div class="page__counters" ></div>
+  `
+  sectoinPageCouners = document.querySelector('.page__counters');
+  for (i = 1; i <= countOfpages; i++) {
+    sectoinPageCouners.innerHTML += `
+    <div class="page__counter-item">${i}</div>
+    `
+  }
+  counterPageitems = document.querySelectorAll('.page__counter-item');
+  counterPageitems.forEach(e => {
+    e.addEventListener("click", () => {
+      if (filteredArr.length === 0) {
+        displayProducts(products, +e.innerHTML);
+      } else {
+        displayProducts(filteredArr, +e.innerHTML)
+      }
+    })
+  })
 }
 
-displayProducts(products);
+displayProducts(products, 1);
+
 
 let categoryFilteredArr = [];
 let colorFilteredsArr = [];
@@ -122,7 +115,7 @@ const searchInput = document.querySelector('.main__search');
 let categoriesSelected = [];
 let colorsSelected = [];
 
-let filter2Arr = function (arr) {
+let combineTwoArrs = function (arr) {
   let newArr = [];
   for (i = 0; i < arr.length; i++) {
     console.log(i)
@@ -142,10 +135,9 @@ let compareAndFilter = function (arrFiltered, arrSelected = 0) {
   ) {
     filteredArr = [];
   } else if (arrFiltered.length > 0) {
-    filter2Arr(arrFiltered);
+    combineTwoArrs(arrFiltered);
   }
 }
-
 
 function filter() {
   filteredArr = [...products];
