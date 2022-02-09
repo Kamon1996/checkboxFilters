@@ -82,8 +82,6 @@ body {
   color: #000000;
 }
 
-h5 {
-}
 
 h6 {
   color: red;
@@ -111,8 +109,9 @@ header {
 .main__search {
   width: 759px;
   height: 71px;
-  padding: 0 33px;
+  padding: 0px 33px;
   background: #c4c4c4;
+  margin: 0 auto;
 }
 
 .busket {
@@ -134,14 +133,14 @@ aside.filter {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  flex: 1 0 25%;
+  flex: 1 1 35%;
 }
 
 .main__right {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 74px;
-  flex: 1 0 75%;
+  flex: 1 1 65%;
 }
 
 .filter__category {
