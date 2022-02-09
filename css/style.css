@@ -111,7 +111,7 @@ header {
   height: 71px;
   padding: 0px 33px;
   background: #c4c4c4;
-  margin: 0 auto;
+  margin-left: auto;
 }
 
 .busket {
@@ -133,14 +133,16 @@ aside.filter {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  flex: 1 1 35%;
+  flex: 1 1 15%;
 }
 
 .main__right {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 74px;
-  flex: 1 1 65%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 400px) 40px;
+  flex: 1 1 85%;
+  margin-bottom: 30px;
+  row-gap: 40px;
 }
 
 .filter__category {
@@ -159,13 +161,13 @@ aside.filter {
 }
 
 .item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    width: 327px;
-    height: 398px;
-    gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 327px;
+  height: 398px;
+  padding: 10px 20px;
 }
 
 .item__about {
@@ -176,7 +178,11 @@ aside.filter {
     padding: 0 20px;
 }
 
-.item p {
+.item__about p {
+  text-align: center;
+}
+
+.item__description {
     padding: 0 20px;
 }
 
@@ -184,4 +190,24 @@ aside.filter {
   width: 144px;
   height: 33px;
   background: #c4c4c4;
+}
+
+.page__counters {
+  grid-column: 2/3;
+  grid-row: -1/-2;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.page__counter-item {
+  width: 30px;
+  height: 30px;
+  background-color: #9ca6e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
 }
