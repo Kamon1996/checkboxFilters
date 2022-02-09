@@ -135,52 +135,27 @@ let filter2Arr = function (arr) {
   filteredArr = [...newArr];
 }
 
+let compareAndFilter = function (arrFiltered, arrSelected = 0) {
+  if (
+    arrSelected.length > 0 &&
+    arrFiltered.length === 0
+  ) {
+    filteredArr = [];
+  } else if (arrFiltered.length > 0) {
+    filter2Arr(arrFiltered);
+  }
+}
+
 
 function filter() {
   filteredArr = [...products];
-  if (
-    categoriesSelected.length > 0 &&
-    categoryFilteredArr.length === 0
-  ) {
-    filteredArr = [];
-  } else if (categoryFilteredArr.length > 0) {
-    filter2Arr(categoryFilteredArr);
-  }
 
-  if (
-    colorsSelected.length > 0 &&
-    colorFilteredsArr.length === 0
-  ) {
-    filteredArr = [];
-  } else if (colorFilteredsArr.length > 0) {
-    filter2Arr(colorFilteredsArr);
-  }
-
-  if (
-    minPriceInput.value.length > 0 &&
-    minPriceArr.length === 0
-  ) {
-    filteredArr = [];
-  } else if (minPriceArr.length > 0) {
-    filter2Arr(minPriceArr);
-  }
-
-  if (
-    maxPriceInput.value.length > 0 &&
-    maxPriceArr.length === 0
-  ) {
-    filteredArr = [];
-  } else if (maxPriceArr.length > 0) {
-    filter2Arr(maxPriceArr);
-  }
-
-  if (descriptionFilteredArr.length > 0) {
-    filter2Arr(descriptionFilteredArr);
-  }
-
-  if (titleFilteredArr.length > 0) {
-    filter2Arr(titleFilteredArr);
-  }
+  compareAndFilter(categoryFilteredArr, categoriesSelected);
+  compareAndFilter(colorFilteredsArr, colorsSelected);
+  compareAndFilter(minPriceArr, minPriceInput.value);
+  compareAndFilter(maxPriceArr, maxPriceInput.value);
+  compareAndFilter(descriptionFilteredArr);
+  compareAndFilter(titleFilteredArr);
 
   if (
     searchInput.value.length > 0 &&
