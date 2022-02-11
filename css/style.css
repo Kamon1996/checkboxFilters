@@ -145,20 +145,62 @@ aside.filter {
   row-gap: 40px;
 }
 
-.filter__category {
-  display: flex;
-  flex-direction: column;
-}
-
 .filter__price {
   display: flex;
   flex-direction: column;
 }
 
-.filter__color {
+.filter__price input {
+  background-color: rgb(224 224 224);
+  max-width: 150px;
+  font-size: 16px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.filter__price input::-webkit-outer-spin-button,
+.filter__price input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.filter__color,
+.filter__category {
   display: flex;
   flex-direction: column;
+  gap: 5px;
 }
+
+.filter__color ::first-letter,
+.filter__category ::first-letter {
+  text-transform: uppercase;
+}
+
+.filter__color input,
+.filter__category input {
+  display: none;
+}
+
+.filter__color label,
+.filter__category label {
+  max-width: 150px;
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: rgb(224 224 224);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all linear .3s;
+}
+
+.filter__color label:hover,
+.filter__color input:checked + label,
+.filter__category label:hover,
+.filter__category input:checked + label {
+  background-color: #72dfff;
+}
+
+
+
 
 .item {
   display: flex;
