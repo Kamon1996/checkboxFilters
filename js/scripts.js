@@ -191,12 +191,12 @@ colors.forEach((elem) => {
 });
 
 
-minPriceInput.addEventListener("keyup", () => {
+minPriceInput.addEventListener("keydown", () => {
   minPriceArr = products.filter(v => minPriceInput.value <= v.price);
   filter();
 })
 
-maxPriceInput.addEventListener("keyup", () => {
+maxPriceInput.addEventListener("keydown", () => {
   maxPriceArr = products.filter(v => maxPriceInput.value >= v.price);
   filter();
 })
