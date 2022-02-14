@@ -44,6 +44,32 @@ setNewArg(products, "category", "men's clothing", "jewelery", "electronics", "wo
 setNewId(products);
 
 
+function partition(arr, arg, start, end) {
+  // Taking the last element as the pivot
+  const pivotValue = arr[end][arg];
+  let pivotIndex = start;
+  for (let i = start; i < end; i++) {
+    if (arr[i][arg] < pivotValue) {
+      // Swapping elements
+      [arr[i][arg], arr[pivotIndex][arg]] = [arr[pivotIndex][arg], arr[i][arg]];
+      // Moving to next element
+      pivotIndex++;
+    }
+  }
+  // Putting the pivot value in the middle
+  [arr[pivotIndex][arg], arr[end][arg]] = [arr[end][arg], arr[pivotIndex][arg]]
+  return pivotIndex;
+};
+
+function quickSortRecursive(arr, start, end) {
+  if (start >= end) {
+    return;
+  }
+  let index = partition(arr, start, end);
+  quickSort(arr, start, index - 1);
+  quickSort(arr, index + 1, end);
+}
+
 
 const sectionMain = document.querySelector(".main__right");
 let sectoinPageCouners;
@@ -196,8 +222,24 @@ minPriceInput.addEventListener("keydown", () => {
   filter();
 })
 
+minPriceInput.addEventListener("keyup", () => {
+  minPriceArr = products.filter(v => minPriceInput.value <= v.price);
+  filter();
+})
+
 maxPriceInput.addEventListener("keydown", () => {
   maxPriceArr = products.filter(v => maxPriceInput.value >= v.price);
+  filter();
+})
+
+maxPriceInput.addEventListener("keyup", () => {
+  maxPriceArr = products.filter(v => maxPriceInput.value >= v.price);
+  filter();
+})
+
+searchInput.addEventListener("keydown", () => {
+  descriptionFilteredArr = products.filter(v => v.description.includes(searchInput.value));
+  titleFilteredArr = products.filter(v => v.title.includes(searchInput.value));
   filter();
 })
 
